@@ -703,11 +703,11 @@ function openAPIModal(){
       <h2>🔑 Conectar API-Football</h2>
       <p>Busca todos os jogadores de uma liga — não só os artilheiros. Quanto mais páginas, mais jogadores desconhecidos você encontra (20 por página).</p>
       <div class="api-steps">
-        <div class="api-step"><span class="n">1.</span>Acesse <a href="https://dashboard.api-football.com/register" target="_blank">api-football.com → Criar conta</a> (plano gratuito: 100 req/dia)</div>
-        <div class="api-step"><span class="n">2.</span>Copie a <strong>API Key</strong> no painel (My Account → API Key)</div>
+        <div class="api-step"><span class="n">1.</span>Acesse <a href="https://rapidapi.com/api-sports/api/api-football" target="_blank">RapidAPI → API-Football</a> e subscribe no plano gratuito</div>
+        <div class="api-step"><span class="n">2.</span>Copie a <strong>X-RapidAPI-Key</strong> no painel (Header Parameters)</div>
         <div class="api-step"><span class="n">3.</span>Escolha liga, temporada e número de páginas a buscar</div>
       </div>
-      <div class="api-row"><input id="api-key-input" class="api-input" type="text" placeholder="Sua x-apisports-key…"></div>
+      <div class="api-row"><input id="api-key-input" class="api-input" type="text" placeholder="Sua X-RapidAPI-Key…"></div>
       <div class="api-row">
         <select id="api-league" class="api-sel">${LEAGUES_API.map(l=>`<option value="${l.id}">${l.f} ${l.n}</option>`).join('')}</select>
         <select id="api-season" class="api-sel"><option value="2024">2024/25</option><option value="2023">2023/24</option></select>
@@ -733,8 +733,8 @@ async function connectAPI(){
   if(!key)return;
   closeModal();S.loading=true;S.error='';render();
   try{
-    const BASE='https://v3.football.api-sports.io';
-    const headers={'x-apisports-key':key};
+    const BASE='https://api-football-v1.p.rapidapi.com/v3';
+    const headers={'x-rapidapi-key':key,'x-rapidapi-host':'api-football-v1.p.rapidapi.com'};
     const map=new Map();
     for(let pg=1;pg<=_apiPages;pg++){
       const res=await fetch(`${BASE}/players?league=${league}&season=${season}&page=${pg}`,{headers}).then(r=>r.json());
