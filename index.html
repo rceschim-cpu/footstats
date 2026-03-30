@@ -733,8 +733,8 @@ async function connectAPI(){
   if(!key)return;
   closeModal();S.loading=true;S.error='';render();
   try{
-    const BASE='https://v3.football.api-sports.io';
-    const headers={'x-apisports-key':key};
+    const BASE='https://api-football-v1.p.rapidapi.com/v3';
+    const headers={'x-rapidapi-key':key,'x-rapidapi-host':'api-football-v1.p.rapidapi.com'};
     const map=new Map();
     for(let pg=1;pg<=_apiPages;pg++){
       const res=await fetch(`${BASE}/players?league=${league}&season=${season}&page=${pg}`,{headers}).then(r=>r.json());
